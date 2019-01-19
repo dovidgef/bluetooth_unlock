@@ -11,6 +11,7 @@ with open("config.yml", 'r') as ymlfile:
 bt_address = cfg['mac_address']
 interval = cfg['interval']
 max_rssi = cfg['max_rssi']
+delay = cfg['delay']
 locked = False
 last_values = []
 average_value = 0
@@ -33,14 +34,16 @@ while True:
     average_value = sum(last_values) / len(last_values)
     print("average:", average_value)
 
-
     if average_value < max_rssi and not locked:
         os.system('xdg-screensaver lock')
         locked = True
-        time.sleep(3)
+        # Delay before checking for unlock condition
+        time.sleep(delay)
     elif average_value >= max_rssi and locked:
         os.system('loginctl unlock-session && xset dpms force on')
         locked = False
+        # Delay after unlock before checking for lock condition
+        time.sleep(delay)
 
 
     time.sleep(.3)
