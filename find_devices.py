@@ -7,7 +7,7 @@ import yaml
 with open("config.yml", 'r') as ymlfile:
     cfg = yaml.load(ymlfile)
 
-nearby_devices = bluetooth.discover_devices(2, lookup_names=True,)
+nearby_devices = bluetooth.discover_devices(4, lookup_names=True,)
 found = len(nearby_devices)
 
 if found:

@@ -9,8 +9,9 @@ with open("config.yml", 'r') as ymlfile:
     cfg = yaml.load(ymlfile)
 
 bt_address = cfg['mac_address']
-interval = cfg['interval']
+intervals = cfg['intervals']
 max_rssi = cfg['max_rssi']
+lost_rssi = intervals * -15
 delay = cfg['delay']
 locked = False
 last_values = []
@@ -18,21 +19,21 @@ average_value = 0
 
 print("track device:", bt_address)
 btrssi = BluetoothRSSI(addr=bt_address)
+
 while True:
     rssi = btrssi.request_rssi()
     if rssi is not None:
         rssi = rssi[0]
     else:
         print("lost connection")
-        rssi = -85
+        rssi = lost_rssi
 
     last_values.append(rssi)
-    print("signal strength:", rssi)
-    print(last_values)
-    if len(last_values) > interval:
+    # print(last_values)
+    if len(last_values) > intervals:
         last_values.pop(0)
     average_value = sum(last_values) / len(last_values)
-    print("average:", average_value)
+    print("last signal:", rssi, "average:", average_value)
 
     if average_value < max_rssi and not locked:
         os.system('xdg-screensaver lock')
@@ -45,5 +46,4 @@ while True:
         # Delay after unlock before checking for lock condition
         time.sleep(delay)
 
-
-    time.sleep(.3)
+    time.sleep(.4)

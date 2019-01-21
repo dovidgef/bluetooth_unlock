@@ -1,3 +1,2 @@
-bt-proximity==0.1.2
 PyBluez==0.22
 PyYAML==3.13
