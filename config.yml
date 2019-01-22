@@ -1,4 +1,6 @@
 delay: 5
 intervals: 10
 mac_address: A4:E4:B8:A5:A4:0E
-max_rssi: -36
+max_rssi: -40
+unlock_script: ./unlock.sh
+lock_script: ./lock.sh

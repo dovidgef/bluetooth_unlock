@@ -1,7 +1,11 @@
 ### Bluetooth Unlock
 This program allows you to automatically lock/unlock your Ubuntu desktop based
-on a bluetooth devices proximity to your computer. The devices bluetooth needs to be on 
-but it should not need to be in discoverable mode for it to work.
+on the distance of a bluetooth devices from your computer. 
+It should work even if the device is not in discoverable mode.
+
+It also allows you to run a bash script on system lock/unlock.
+This for example could be used to allow you to play/pause a music player automatically 
+on system lock/unlock using a program like [playerctl](https://github.com/acrisci/playerctl)
 
 #### Prerequisites 
 * Ubuntu
@@ -27,6 +31,11 @@ It has only been tested on Ubuntu 18.04 with Gnome desktop
    
 * Start proximity detection
   1. Run `python3 bluetooth_unlock.py` to start automatic lock/unlock based on device proximity.
+  
+* Setup bash scripts for running on system lock/unlock
+  * I have provided `unlock.sh` and `lock.sh` scripts which run on unlock/lock.
+  * You can modify them for your needs, or you can provide the path to other
+  scripts in the config.yml file.
 
 * Optionally modify the config.yml file to modify program settings
     ```bash
@@ -44,4 +53,13 @@ It has only been tested on Ubuntu 18.04 with Gnome desktop
 
     # max_rssi: -36
     Determines the signal strength that will cause computer to be locked  
+  
+    # unlock_script: ./unlock.sh
+    Path to bash script which runs when system is unlocked
+
+    # lock_script: ./lock.sh
+    Path to bash script which runs when system is locked
     ```
+    
+
+Credit to to [FrederikBolding](https://github.com/FrederikBolding/bluetooth-proximity) for the RSSI detection script

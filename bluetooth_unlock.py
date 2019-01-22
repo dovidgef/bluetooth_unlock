@@ -17,6 +17,9 @@ locked = False
 last_values = []
 average_value = 0
 
+unlock_script = cfg['unlock_script']
+lock_script = cfg['lock_script']
+
 print("track device:", bt_address)
 btrssi = BluetoothRSSI(addr=bt_address)
 
@@ -38,11 +41,15 @@ while True:
     if average_value < max_rssi and not locked:
         os.system('xdg-screensaver lock')
         locked = True
+        # Run lock script
+        os.system(lock_script)
         # Delay before checking for unlock condition
         time.sleep(delay)
     elif average_value >= max_rssi and locked:
         os.system('loginctl unlock-session && xset dpms force on')
         locked = False
+        # Run unlock script
+        os.system(unlock_script)
         # Delay after unlock before checking for lock condition
         time.sleep(delay)
 
