@@ -9,12 +9,11 @@ on system lock/unlock using a program like [playerctl](https://github.com/acrisc
 
 #### Prerequisites 
 * Ubuntu
-* Gnome Desktop
 * Python 3
 * Bluetooth adaptor
 * Additional bluetooth device (e.g. cell phone)
 
-It has only been tested on Ubuntu 18.04 with Gnome desktop
+It has been tested on both Ubuntu 16.04 and 18.04
 
 #### Setup Instructions
 1. Install libbluetooth-dev package `sudo apt-get install libbluetooth-dev`
@@ -62,4 +61,4 @@ It has only been tested on Ubuntu 18.04 with Gnome desktop
     ```
     
 
-Credit to to [FrederikBolding](https://github.com/FrederikBolding/bluetooth-proximity) for the RSSI detection script
+Credit to [FrederikBolding](https://github.com/FrederikBolding/bluetooth-proximity) for the RSSI detection script
